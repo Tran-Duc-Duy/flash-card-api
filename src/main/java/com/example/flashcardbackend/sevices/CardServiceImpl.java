@@ -6,6 +6,9 @@ import com.example.flashcardbackend.repository.CardRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CardServiceImpl implements CardService {
     private CardRepository cardRepository;
@@ -20,5 +23,11 @@ public class CardServiceImpl implements CardService {
         BeanUtils.copyProperties(card, cardEntity);
         cardRepository.save(cardEntity);
         return card;
+    }
+    @Override
+    public List<Card> getAllCards() {
+        List<CardEntity> cardEntities = cardRepository.findAll();
+        List<Card> cards= cardEntities.stream().map(card-> new Card (card.getId(),card.getFront(),card.getBack())).collect(Collectors.toList());
+        return cards;
     }
 }
