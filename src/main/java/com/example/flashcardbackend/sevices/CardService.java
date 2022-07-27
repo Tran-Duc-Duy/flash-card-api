@@ -7,4 +7,6 @@ import java.util.List;
 public interface CardService {
     Card createCard(Card card);
     List<Card> getAllCards();
+
+    boolean deleteCard(Long id);
 }

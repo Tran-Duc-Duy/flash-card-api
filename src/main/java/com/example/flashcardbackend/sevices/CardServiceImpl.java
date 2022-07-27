@@ -30,4 +30,11 @@ public class CardServiceImpl implements CardService {
         List<Card> cards= cardEntities.stream().map(card-> new Card (card.getId(),card.getFront(),card.getBack())).collect(Collectors.toList());
         return cards;
     }
+
+    @Override
+    public boolean deleteCard(Long id) {
+        CardEntity cardEntity = cardRepository.findById(id).get();
+        cardRepository.delete(cardEntity);
+        return true;
+    }
 }
