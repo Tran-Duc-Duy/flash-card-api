@@ -9,4 +9,8 @@ public interface CardService {
     List<Card> getAllCards();
 
     boolean deleteCard(Long id);
+
+    Card getCardById(Long id);
+
+    Card updateCard(Long id, Card card);
 }
