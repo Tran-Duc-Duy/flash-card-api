@@ -33,4 +33,15 @@ public class CardController {
         Map<String, Boolean> response = Map.of("deleted", deleted);
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/cards/{id}")
+    public ResponseEntity<Card> getCardById(@PathVariable(value = "id") Long id) {
+        Card card = cardService.getCardById(id);
+        return ResponseEntity.ok(card);
+    }
+
+    @PutMapping("/cards/{id}")
+    public ResponseEntity<Card> updateCard(@PathVariable(value = "id") Long id, @RequestBody Card card) {
+        card = cardService.updateCard(id, card);
+        return ResponseEntity.ok(card);
+    }
 }
