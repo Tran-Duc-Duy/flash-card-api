@@ -37,4 +37,21 @@ public class CardServiceImpl implements CardService {
         cardRepository.delete(cardEntity);
         return true;
     }
+
+    @Override
+    public Card getCardById(Long id) {
+        CardEntity cardEntity = cardRepository.findById(id).get();
+        Card card = new Card(cardEntity.getId(),cardEntity.getFront(),cardEntity.getBack());//TODO: change to constructor
+        return card;
+    }
+
+    @Override
+    public Card updateCard(Long id, Card card) {
+        CardEntity cardEntity = cardRepository.findById(id).get();
+        //BeanUtils.copyProperties(card, cardEntity);
+        cardEntity.setFront(card.getFront());
+        cardEntity.setBack(card.getBack());
+        cardRepository.save(cardEntity);
+        return card;
+    }
 }
